@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(connect4
     src/main.cpp
+    src/grid.cpp
+    src/cursor.cpp
+    src/input.cpp
+    src/connect4.cpp
 )
 
 target_include_directories(connect4
