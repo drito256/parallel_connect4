@@ -6,7 +6,6 @@ Grid::Grid(){
         for(int j = 0; j < this->grid_width; j++){
             this->grid[i][j] = 0;
         }
-        grid[5][5] = 1;
     }
 }
 
@@ -55,5 +54,77 @@ bool Grid::update(uint16_t cursor_pos, int16_t turn){
         }
     }
     return false;
+}
+int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
+    uint16_t consecutive_counter = 0;
+    int16_t turn = grid[last_move_y_pos][last_move_x_pos];
+
+    // vertical check
+    for(int i = 5; i >=0; i--){
+
+        if(grid[i][last_move_x_pos] == turn){
+            consecutive_counter++;
+            if(consecutive_counter == 4){
+                return turn;
+            }
+        }
+        else{
+            consecutive_counter = 0;
+        }
+    }
+    if(consecutive_counter == 4){
+        return turn;
+    }
+    consecutive_counter = 0;
+
+    // horizontal check
+    for(int i = 6; i >=0; i--){
+
+        if(grid[last_move_y_pos][i] == turn){
+            consecutive_counter++;
+            if(consecutive_counter == 4){
+                return turn;
+            }
+        }
+        else{
+            consecutive_counter = 0;
+        }
+    }
+    if(consecutive_counter == 4){
+        return turn;
+    }
+
+    consecutive_counter = 0;
+    // diagonals check needed
+
+    
+    // check if grid is full
+    uint16_t last_row_coins = 0;
+    for(int j = 0; j < grid_width; j++){ // its enough to check the last row
+        if(grid[5][j] != 0){
+            last_row_coins++;
+        }
+        else{
+            break;
+        }
+    }
+    if(last_row_coins == 7){ // if all the coins have been placed, its a draw
+        return 0;
+    }
+
+    return 2; // keep playing
+
+}
+
+int16_t Grid::check_state(uint16_t last_move_x_pos){
+    uint16_t last_move_y_pos = 0;
+
+    for(int i = 0; i < 6; i++){
+        if(grid[i][last_move_x_pos] != 0){
+            last_move_y_pos = i;
+        }
+    }
+    int16_t status = check_state(last_move_x_pos, last_move_y_pos);
+    return status;
 }
 

@@ -11,6 +11,7 @@ add_executable(connect4
     src/cursor.cpp
     src/input.cpp
     src/connect4.cpp
+    src/computer.cpp
 )
 
 target_include_directories(connect4
