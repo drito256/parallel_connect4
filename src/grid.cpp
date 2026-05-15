@@ -93,10 +93,53 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
     if(consecutive_counter == 4){
         return turn;
     }
-
     consecutive_counter = 0;
-    // diagonals check needed
 
+    // diagonal 1
+    int start_x = last_move_x_pos;
+    int start_y = last_move_y_pos;
+    while(start_x > 0 && start_y > 0){
+        start_x--;
+        start_y--;
+    }
+    while(start_x < grid_width && start_y < grid_height){
+        if(grid[start_y][start_x] == turn){
+            consecutive_counter++;
+        }
+        else{
+            consecutive_counter = 0;
+        }
+        start_x++;
+        start_y++;
+    }
+    if(consecutive_counter == 4){
+        return turn;
+    }
+    consecutive_counter = 0;
+
+
+    // diagonal 2
+    start_x = last_move_x_pos;
+    start_y = last_move_y_pos;
+    while(start_x < grid_width && start_y > 0){
+        start_x++;
+        start_y--;
+    }
+    while(start_x > 0  && start_y < grid_height){
+        if(grid[start_y][start_x] == turn){
+            consecutive_counter++;
+        }
+        else{
+            consecutive_counter = 0;
+        }
+        start_x--;
+        start_y++;
+    }
+
+    if(consecutive_counter == 4){
+        return turn;
+    }
+    consecutive_counter = 0;
     
     // check if grid is full
     uint16_t last_row_coins = 0;
