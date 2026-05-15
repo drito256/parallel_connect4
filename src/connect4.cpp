@@ -11,7 +11,6 @@ void Connect4::play(){
    while(game_finished == 2){ 
     int button = 1;
     bool valid_move = false;
-
     // players turn
     while(!valid_move){
         int button = input.get();

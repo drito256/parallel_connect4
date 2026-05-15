@@ -72,9 +72,6 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
             consecutive_counter = 0;
         }
     }
-    if(consecutive_counter == 4){
-        return turn;
-    }
     consecutive_counter = 0;
 
     // horizontal check
@@ -90,9 +87,6 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
             consecutive_counter = 0;
         }
     }
-    if(consecutive_counter == 4){
-        return turn;
-    }
     consecutive_counter = 0;
 
     // diagonal 1
@@ -105,15 +99,15 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
     while(start_x < grid_width && start_y < grid_height){
         if(grid[start_y][start_x] == turn){
             consecutive_counter++;
+            if(consecutive_counter == 4){
+                return turn;
+            }
         }
         else{
             consecutive_counter = 0;
         }
         start_x++;
         start_y++;
-    }
-    if(consecutive_counter == 4){
-        return turn;
     }
     consecutive_counter = 0;
 
@@ -128,6 +122,9 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
     while(start_x > 0  && start_y < grid_height){
         if(grid[start_y][start_x] == turn){
             consecutive_counter++;
+            if(consecutive_counter == 4){
+                return turn;
+            }
         }
         else{
             consecutive_counter = 0;
@@ -136,9 +133,6 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
         start_y++;
     }
 
-    if(consecutive_counter == 4){
-        return turn;
-    }
     consecutive_counter = 0;
     
     // check if grid is full
