@@ -10,8 +10,12 @@ Grid::Grid(){
 }
 
 void Grid::draw_horizontal_line(){
-    for(int i = 0; i < this->grid_width * 2 + 1; i++){
-        std::cout << "--";
+    std::cout << "  ";
+    for(int i = 0; i < this->grid_width * 3 + 1; i++){
+        if(i%3==0)
+            std::cout << "┼";
+        if(i < this->grid_width * 3)
+            std::cout << "─";
     }
     std::cout << "\n";
 }
@@ -28,16 +32,17 @@ void Grid::show(){
             int reverse_gh = this->grid_height - i - 1;
 
             if(j == 0)
-                std::cout << "|";
+                std::cout << "  │";
             
             if(this->grid[reverse_gh][j] == 0){
-                std::cout << "   " << "|";
+                std::cout << "   " << "│";
+            
             }
             else if(this->grid[reverse_gh][j] == 1){
-                std::cout << " " << "o" << " " << "|";
+                std::cout << " " << "\033[33m\u25CF\033[0m" << " " << "│";
             }
             else{
-                std::cout <<  " " << "x" << " " << "|";
+                std::cout <<  " " << "\033[35m\u25CF\033[0m" << " " << "│";
             }
         }
         std::cout << "\n";

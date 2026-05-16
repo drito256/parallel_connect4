@@ -6,11 +6,12 @@ Cursor::Cursor(){
 }
 
 void Cursor::show(){
+    std::cout << "  ";
     for(int i = 0; i < this->pos; i++){
         std::cout << "    ";
     }
 
-    std::cout << "  |  ";
+    std::cout << "  ▼  ";
     std::cout << "\n";
 }
 

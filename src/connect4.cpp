@@ -5,7 +5,6 @@ void Connect4::play(){
    std::cout << "\033[3J\033[2J\033[H"; // clear screen
    cursor.show();
    grid.show();
-    
    int16_t game_finished = 2; // 2 indicates that game is still being player, should later be turned to enum
    
    while(game_finished == 2){ 
@@ -42,12 +41,18 @@ void Connect4::play(){
     }
 
     if(game_finished == 1){
-       std::cout << "Congrats! You won against my suuuuper smart AI brain!\n";
+        std::cout << "\n======================================================\n";
+        std::cout << "Congrats! You won against my suuuuper smart AI brain!";
+        std::cout << "\n======================================================\n";
     }
     else if(game_finished == -1){
-        std::cout << "Better luck next time bud!\n";
+        std::cout << "\n==========================\n";
+        std::cout << "\nBetter luck next time bud!";
+        std::cout << "\n==========================\n";
     }
     else{
-        std::cout << "Who would have thought you are as smart as me! It's a draw!\n";
+        std::cout << "\n==========================================================\n";
+        std::cout << "\nWho would have thought you are as smart as me! It's a draw!";
+        std::cout << "\n==========================================================\n";
     }
 }
