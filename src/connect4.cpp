@@ -36,23 +36,29 @@ void Connect4::play(){
     }
 
     // computer turn
-    //computer.make_move();
-    //game_finished = grid.check_state(cursor.get_pos());
+    uint16_t computer_choice = computer.choose_move(grid);
+    grid.update(computer_choice, -1);
+    game_finished = grid.check_state(computer_choice);
+    
+    std::cout << "\033[3J\033[2J\033[H"; // clear screen
+    cursor.show();
+    grid.show();
+
     }
 
     if(game_finished == 1){
-        std::cout << "\n======================================================\n";
-        std::cout << "Congrats! You won against my suuuuper smart AI brain!";
-        std::cout << "\n======================================================\n";
+        std::cout << "\n  ======================================================\n";
+        std::cout << "  Congrats! You won against my suuuuper smart AI brain!";
+        std::cout << "\n  ======================================================\n";
     }
     else if(game_finished == -1){
-        std::cout << "\n==========================\n";
-        std::cout << "\nBetter luck next time bud!";
-        std::cout << "\n==========================\n";
+        std::cout << "\n  ==========================\n";
+        std::cout << "  Better luck next time bud!";
+        std::cout << "\n  ==========================\n";
     }
     else{
-        std::cout << "\n==========================================================\n";
-        std::cout << "\nWho would have thought you are as smart as me! It's a draw!";
-        std::cout << "\n==========================================================\n";
+        std::cout << "\n  ==========================================================\n";
+        std::cout << "  Who would have thought you are as smart as me! It's a draw!";
+        std::cout << "\n  ==========================================================\n";
     }
 }

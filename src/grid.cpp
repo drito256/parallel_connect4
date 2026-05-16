@@ -8,7 +8,6 @@ Grid::Grid(){
         }
     }
 }
-
 void Grid::draw_horizontal_line(){
     std::cout << "  ";
     for(int i = 0; i < this->grid_width * 3 + 1; i++){

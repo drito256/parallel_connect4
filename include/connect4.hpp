@@ -1,6 +1,6 @@
-#include "grid.hpp"
 #include "cursor.hpp"
 #include "input.hpp"
+#include "computer.hpp"
 
 #include <iostream>
 
@@ -12,4 +12,5 @@ class Connect4{
         Grid grid;
         Cursor cursor;
         Input input;
+        Computer computer;
 };
