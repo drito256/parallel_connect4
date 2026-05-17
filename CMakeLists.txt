@@ -5,15 +5,22 @@ project(connect4 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(MPI REQUIRED)
+
 add_executable(connect4
     src/main.cpp
     src/grid.cpp
     src/cursor.cpp
     src/input.cpp
     src/connect4.cpp
+    src/parallel_computer.cpp
     src/computer.cpp
 )
 
 target_include_directories(connect4
     PUBLIC include
+)
+
+target_link_libraries(connect4
+    PRIVATE MPI::MPI_CXX
 )

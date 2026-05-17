@@ -2,18 +2,22 @@
 
 Grid::Grid(){
 
-    for(int i = 0; i < this->grid_height; i++){
-        for(int j = 0; j < this->grid_width; j++){
+    for(int i = 0; i < this->height; i++){
+        for(int j = 0; j < this->width; j++){
             this->grid[i][j] = 0;
         }
     }
 }
-void Grid::draw_horizontal_line(){
+
+uint16_t Grid::get_width() const {
+    return this->width;
+}
+void Grid::draw_horizontal_line() const {
     std::cout << "  ";
-    for(int i = 0; i < this->grid_width * 3 + 1; i++){
+    for(int i = 0; i < this->width * 3 + 1; i++){
         if(i%3==0)
             std::cout << "┼";
-        if(i < this->grid_width * 3)
+        if(i < this->width * 3)
             std::cout << "─";
     }
     std::cout << "\n";
@@ -22,13 +26,13 @@ void Grid::draw_horizontal_line(){
 // draw grid
 // lower left coordinates: (0,0)
 // uuper right coordinates: (6,5)
-void Grid::show(){
+void Grid::show() const {
 
     this->draw_horizontal_line();
 
-    for(int i = 0; i < this->grid_height; i++){
-        for(int j = 0; j < this->grid_width; j++){
-            int reverse_gh = this->grid_height - i - 1;
+    for(int i = 0; i < this->height; i++){
+        for(int j = 0; j < this->width; j++){
+            int reverse_gh = this->height - i - 1;
 
             if(j == 0)
                 std::cout << "  │";
@@ -59,7 +63,7 @@ bool Grid::update(uint16_t cursor_pos, int16_t turn){
     }
     return false;
 }
-int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
+int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos) const {
     uint16_t consecutive_counter = 0;
     int16_t turn = grid[last_move_y_pos][last_move_x_pos];
 
@@ -100,7 +104,7 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
         start_x--;
         start_y--;
     }
-    while(start_x < grid_width && start_y < grid_height){
+    while(start_x < this->width && start_y < height){
         if(grid[start_y][start_x] == turn){
             consecutive_counter++;
             if(consecutive_counter == 4){
@@ -119,11 +123,11 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
     // diagonal 2
     start_x = last_move_x_pos;
     start_y = last_move_y_pos;
-    while(start_x < grid_width && start_y > 0){
+    while(start_x < this->width && start_y > 0){
         start_x++;
         start_y--;
     }
-    while(start_x > 0  && start_y < grid_height){
+    while(start_x > 0  && start_y < this->height){
         if(grid[start_y][start_x] == turn){
             consecutive_counter++;
             if(consecutive_counter == 4){
@@ -141,7 +145,7 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
     
     // check if grid is full
     uint16_t last_row_coins = 0;
-    for(int j = 0; j < grid_width; j++){ // its enough to check the last row
+    for(int j = 0; j < this->width; j++){ // its enough to check the last row
         if(grid[5][j] != 0){
             last_row_coins++;
         }
@@ -150,14 +154,14 @@ int16_t Grid::check_state(uint16_t last_move_x_pos, uint16_t last_move_y_pos){
         }
     }
     if(last_row_coins == 7){ // if all the coins have been placed, its a draw
-        return 0;
+        return 2;
     }
 
-    return 2; // keep playing
+    return 0; // keep playing
 
 }
 
-int16_t Grid::check_state(uint16_t last_move_x_pos){
+int16_t Grid::check_state(uint16_t last_move_x_pos) const {
     uint16_t last_move_y_pos = 0;
 
     for(int i = 0; i < 6; i++){

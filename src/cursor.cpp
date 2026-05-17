@@ -15,10 +15,10 @@ void Cursor::show(){
     std::cout << "\n";
 }
 
-void Cursor::set_pos(u_int16_t pos){
+void Cursor::set_pos(uint16_t pos){
     this->pos = pos;
 }
 
-u_int16_t Cursor::get_pos(){
+uint16_t Cursor::get_pos(){
     return pos;
 }

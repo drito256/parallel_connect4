@@ -1,16 +1,22 @@
 #include "cursor.hpp"
 #include "input.hpp"
-#include "computer.hpp"
+//#include "computer.hpp"
+#include "parallel_computer.hpp"
 
+
+#include <mpi.h>
 #include <iostream>
 
 class Connect4{
     public:
+        void init(int argc, char** argv);
         void play();
-
+        void refresh();
     private:
         Grid grid;
         Cursor cursor;
         Input input;
-        Computer computer;
+        ParallelComputer computer;
+
+        //void refresh();
 };
