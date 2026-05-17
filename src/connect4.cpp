@@ -1,7 +1,9 @@
 #include "../include/connect4.hpp"
 
 #include <mpi.h>
+#include <thread>
 #include <type_traits>
+#include <chrono>
 
 namespace {
     constexpr int CMD_AI_TURN = 0;
@@ -86,7 +88,12 @@ void Connect4::play() {
 
         // use sequential version if only 1 cpu is available
         if (size == 1) {
+            auto start = std::chrono::high_resolution_clock::now();
             computer_choice = computer.choose_move(grid);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> elapsed = end - start;
+            std::cout << "Operation took :" << elapsed.count() << " seconds\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // just to read the output
         } 
         else{
 
@@ -101,8 +108,14 @@ void Connect4::play() {
 
             // send the current board to all workers.
             broadcast_grid(grid);
-
+            
+            auto start = std::chrono::high_resolution_clock::now();
             computer_choice = computer.choose_move_parallel_dynamic(grid);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> elapsed = end - start;
+            std::cout << "Operation took :" << elapsed.count() << " seconds\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // just to read the output
+        
         }
 
         grid.update(computer_choice, -1);
