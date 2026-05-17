@@ -1,6 +1,5 @@
 #include "cursor.hpp"
 #include "input.hpp"
-//#include "computer.hpp"
 #include "parallel_computer.hpp"
 
 
@@ -17,6 +16,4 @@ class Connect4{
         Cursor cursor;
         Input input;
         ParallelComputer computer;
-
-        //void refresh();
 };

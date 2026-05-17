@@ -16,12 +16,11 @@ uint16_t choose_max(std::array<float, 7> state_values) {
 
 uint16_t Computer::choose_move(const Grid& grid){
     Grid temp = grid;
-    std::array<float, 7> state_values = simulate_game(temp, 9);
+    std::array<float, 7> state_values = simulate_game(temp, 8);
 
     return choose_max(state_values);
 }
 
-// public facing — AI always goes first
 std::array<float, 7> Computer::simulate_game(Grid& grid, uint16_t depth) {
     return simulate_game(grid, depth, true);
 }
@@ -41,9 +40,9 @@ std::array<float, 7> Computer::simulate_game(Grid& grid, uint16_t depth, bool ai
         int16_t result = temp.check_state(col);
 
         if (result == -1) {
-            state_values[col] = 1.0f;   // AI wins
+            state_values[col] = 1.0f;   // ai wins
         } else if (result == 1) {
-            state_values[col] = -1.0f;  // AI loses
+            state_values[col] = -1.0f;  // ai loses
         } else if (result == 2) {
             state_values[col] = 0.0f;   // draw, neutral
         } else if (depth == 0) {
