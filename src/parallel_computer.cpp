@@ -13,7 +13,7 @@ uint16_t ParallelComputer::choose_move_parallel_dynamic(const Grid& grid) {
     constexpr int STOP_TAG = 2;
     constexpr int RESULT_TAG = 3;
 
-    const int total_depth = 8;
+    const int total_depth = 9;
     const int remaining_depth = total_depth - 2;
 
     if (rank == 0) {
@@ -70,7 +70,7 @@ uint16_t ParallelComputer::choose_move_parallel_dynamic(const Grid& grid) {
             active_workers++;
         }
 
-        // receive results and assignt new work
+        // receive results and assign new work
         while (active_workers > 0) {
             float result_buffer[2];
 

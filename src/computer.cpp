@@ -16,7 +16,7 @@ uint16_t choose_max(std::array<float, 7> state_values) {
 
 uint16_t Computer::choose_move(const Grid& grid){
     Grid temp = grid;
-    std::array<float, 7> state_values = simulate_game(temp, 8);
+    std::array<float, 7> state_values = simulate_game(temp, 9);
 
     return choose_max(state_values);
 }
